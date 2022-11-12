@@ -18,8 +18,7 @@ from decorators.token import token_required
 app = Flask(__name__)
 
 app.config.from_object('config.Config')
-#app.config['SECRET_KEY'] = 'thisissecret'
-#app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
+
 
 db = SQLAlchemy(app)
 
@@ -51,8 +50,6 @@ class Users(Resource):
     @token_required
     @admin_required
     def get(self):
-        if request.status_code == 401:
-            return {'message' : 'Unauthorized'}
 
         users = User.query.all()
 
